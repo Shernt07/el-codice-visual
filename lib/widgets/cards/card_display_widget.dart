@@ -1,26 +1,30 @@
 import 'package:flutter/material.dart';
 
 class CardDisplayWidget extends StatelessWidget {
-  final String name;
-  final String artURL;
-  final String rarity;
-  final int costTonal;
-  final int stroke;
-  final int health;
+  final Map<String, dynamic> data;
 
-  const CardDisplayWidget({
-    super.key,
-    required this.name,
-    required this.artURL,
-    required this.rarity,
-    required this.costTonal,
-    required this.stroke,
-    required this.health,
-  });
+  const CardDisplayWidget({super.key, required this.data});
+
+  Color colorBorder(String rareza) {
+    switch (rareza.toLowerCase()) {
+      case 'mito':
+        return Colors.orange;
+      case 'leyenda':
+        return const Color(0xFFFFD700); // dorado
+      case 'dios':
+        return const Color(0xFF8B0000); // rojo sangre
+      case 'guerrero':
+        return Colors.brown.shade300;
+      default:
+        return Colors.black;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final ValueNotifier<bool> isTapped = ValueNotifier(false);
+    final String rareza = data["Rareza"] ?? "guerrero";
+    final Color borderColor = colorBorder(rareza);
 
     return Center(
       child: ValueListenableBuilder<bool>(
@@ -46,10 +50,7 @@ class CardDisplayWidget extends StatelessWidget {
                       height: 410,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
-                        border: Border.all(
-                          color: Colors.brown.shade300,
-                          width: 10,
-                        ),
+                        border: Border.all(color: borderColor, width: 10),
                       ),
                       child: Stack(
                         fit: StackFit.expand,
@@ -59,7 +60,7 @@ class CardDisplayWidget extends StatelessWidget {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(6),
                             child: Image.network(
-                              artURL,
+                              data["ArteURL"] ?? '',
                               fit: BoxFit.cover,
                               errorBuilder:
                                   (_, __, ___) => Container(
@@ -74,32 +75,32 @@ class CardDisplayWidget extends StatelessWidget {
                             ),
                           ),
 
-                          // Mostrar elementos condicionales al tap
                           if (tapped) ...[
-                            // Coste (gota)
+                            // Vida
                             Positioned(
                               top: 16,
                               left: 16,
-                              child: ClipPath(
-                                clipper: DropShapeClipper(),
-                                child: Container(
-                                  width: 27,
-                                  height: 35,
-                                  color: Colors.brown.shade300,
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    '$costTonal',
+                              child: Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  Image.asset(
+                                    'assets/img/corazon.png',
+                                    height: 26,
+                                    width: 30,
+                                  ),
+                                  Text(
+                                    '${data["Vida"] ?? ''}',
                                     style: const TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16,
                                     ),
                                   ),
-                                ),
+                                ],
                               ),
                             ),
 
-                            // Ataque (espada)
+                            // Espada
                             Positioned(
                               top: 16,
                               right: 16,
@@ -112,7 +113,7 @@ class CardDisplayWidget extends StatelessWidget {
                                     width: 30,
                                   ),
                                   Text(
-                                    '$stroke',
+                                    '${data["Ataque"] ?? ''}',
                                     style: const TextStyle(
                                       fontSize: 16,
                                       color: Colors.white,
@@ -139,7 +140,7 @@ class CardDisplayWidget extends StatelessWidget {
                                 color: Colors.black.withOpacity(0.5),
                                 alignment: Alignment.center,
                                 child: Text(
-                                  name,
+                                  data["Nombre"] ?? '',
                                   style: const TextStyle(
                                     fontSize: 18,
                                     color: Colors.white,
@@ -155,7 +156,7 @@ class CardDisplayWidget extends StatelessWidget {
                               ),
                             ),
 
-                            // Salud (círculo abajo)
+                            // Costo
                             Positioned(
                               bottom: -24,
                               left: 0,
@@ -166,7 +167,7 @@ class CardDisplayWidget extends StatelessWidget {
                                   height: 48,
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
-                                    color: Colors.brown.shade300,
+                                    color: borderColor,
                                     border: Border.all(
                                       color: Colors.white,
                                       width: 3,
@@ -181,7 +182,7 @@ class CardDisplayWidget extends StatelessWidget {
                                   ),
                                   alignment: Alignment.center,
                                   child: Text(
-                                    '$health',
+                                    '${data["Coste_Tonal"] ?? ''}',
                                     style: const TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
@@ -210,26 +211,4 @@ class CardDisplayWidget extends StatelessWidget {
       ),
     );
   }
-}
-
-class DropShapeClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    final path = Path();
-    path.moveTo(size.width / 2, 0);
-    path.quadraticBezierTo(0, size.height * 0.3, 0, size.height * 0.6);
-    path.quadraticBezierTo(0, size.height, size.width / 2, size.height);
-    path.quadraticBezierTo(
-      size.width,
-      size.height,
-      size.width,
-      size.height * 0.6,
-    );
-    path.quadraticBezierTo(size.width, size.height * 0.3, size.width / 2, 0);
-    path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }
