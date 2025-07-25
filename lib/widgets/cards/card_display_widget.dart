@@ -5,6 +5,7 @@ class CardDisplayWidget extends StatelessWidget {
 
   const CardDisplayWidget({super.key, required this.data});
 
+  // Color de cartas según la rareza
   Color colorBorder(String rareza) {
     switch (rareza.toLowerCase()) {
       case 'mito':
@@ -28,9 +29,11 @@ class CardDisplayWidget extends StatelessWidget {
 
     return Center(
       child: ValueListenableBuilder<bool>(
+        // Animación de datos de la carta al tocarla
         valueListenable: isTapped,
         builder: (_, tapped, __) {
           return TweenAnimationBuilder<double>(
+            // Configuración de la animación
             duration: const Duration(milliseconds: 200),
             tween: Tween(begin: 1.0, end: tapped ? 1.05 : 1.0),
             curve: Curves.easeInOut,
@@ -39,6 +42,7 @@ class CardDisplayWidget extends StatelessWidget {
                 scale: scale,
                 child: GestureDetector(
                   onTap: () => isTapped.value = !tapped,
+                  // Carta
                   child: Card(
                     elevation: 14,
                     shape: RoundedRectangleBorder(
@@ -56,12 +60,13 @@ class CardDisplayWidget extends StatelessWidget {
                         fit: StackFit.expand,
                         clipBehavior: Clip.none,
                         children: [
-                          // Imagen de fondo
+                          // Imagen (Gif) de fondo
                           ClipRRect(
                             borderRadius: BorderRadius.circular(6),
                             child: Image.network(
                               data["ArteURL"] ?? '',
                               fit: BoxFit.cover,
+                              // Caso de error de imagen
                               errorBuilder:
                                   (_, __, ___) => Container(
                                     color: Colors.grey.shade300,
@@ -74,7 +79,7 @@ class CardDisplayWidget extends StatelessWidget {
                                   ),
                             ),
                           ),
-                          // Animación de atributos
+                          // Elementos al tocar la carta
                           if (tapped) ...[
                             // Vida
                             Positioned(
@@ -100,7 +105,7 @@ class CardDisplayWidget extends StatelessWidget {
                               ),
                             ),
 
-                            // Espada
+                            // Dano (ataque)
                             Positioned(
                               top: 16,
                               right: 16,
@@ -137,6 +142,7 @@ class CardDisplayWidget extends StatelessWidget {
                               right: 0,
                               child: Container(
                                 height: 40,
+                                // Semitransparente (opacidad en la cinta del nombre)
                                 color: Colors.black.withOpacity(0.5),
                                 alignment: Alignment.center,
                                 child: Text(
@@ -156,7 +162,7 @@ class CardDisplayWidget extends StatelessWidget {
                               ),
                             ),
 
-                            // Costo
+                            // Costo de la carta (Coste_Tonal)
                             Positioned(
                               bottom: -24,
                               left: 0,
@@ -165,6 +171,7 @@ class CardDisplayWidget extends StatelessWidget {
                                 child: Container(
                                   width: 48,
                                   height: 48,
+                                  alignment: Alignment.center,
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     color: borderColor,
@@ -174,13 +181,12 @@ class CardDisplayWidget extends StatelessWidget {
                                     ),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Colors.black.withOpacity(0.4),
+                                        color: Colors.black.withOpacity(0.5),
                                         blurRadius: 6,
                                         offset: const Offset(2, 2),
                                       ),
                                     ],
                                   ),
-                                  alignment: Alignment.center,
                                   child: Text(
                                     '${data["Coste_Tonal"] ?? ''}',
                                     style: const TextStyle(
