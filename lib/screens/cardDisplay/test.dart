@@ -1,10 +1,19 @@
+import 'package:el_codice_visual/widgets/cards/card_display_widget.dart';
 import 'package:flutter/material.dart';
 
 class TestCard extends StatelessWidget {
-  const TestCard({super.key});
+  final Map<String, dynamic> data;
+
+  const TestCard({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Container(
+      color: Colors.white,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [CardDisplayWidget(data: data)],
+      ),
+    );
   }
 }

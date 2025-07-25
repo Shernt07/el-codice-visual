@@ -14,37 +14,10 @@ final appRouter = GoRouter(
     GoRoute(
       path: "/testcard",
       name: "testcard_screen",
-      pageBuilder:
-          (context, state) =>
-              MaterialPage(key: state.pageKey, child: TestCard()),
-    ),
-    GoRoute(
-      path: "/guerrero",
-      name: "guerrero_screen",
-      pageBuilder:
-          (context, state) =>
-              MaterialPage(key: state.pageKey, child: GuerreroScreen()),
-    ),
-    GoRoute(
-      path: "/mito",
-      name: "mito_screen",
-      pageBuilder:
-          (context, state) =>
-              MaterialPage(key: state.pageKey, child: MitoScreen()),
-    ),
-    GoRoute(
-      path: "/leyenda",
-      name: "leyenda_screen",
-      pageBuilder:
-          (context, state) =>
-              MaterialPage(key: state.pageKey, child: LeyendaScreen()),
-    ),
-    GoRoute(
-      path: "/dios",
-      name: "dios_screen",
-      pageBuilder:
-          (context, state) =>
-              MaterialPage(key: state.pageKey, child: DiosScreen()),
+      pageBuilder: (context, state) {
+        final data = state.extra as Map<String, dynamic>;
+        return MaterialPage(key: state.pageKey, child: TestCard(data: data));
+      },
     ),
   ],
 );

@@ -10,9 +10,9 @@ class CardDisplayWidget extends StatelessWidget {
       case 'mito':
         return Colors.orange;
       case 'leyenda':
-        return const Color(0xFFFFD700); // dorado
+        return const Color(0xFFFFD700);
       case 'dios':
-        return const Color(0xFF8B0000); // rojo sangre
+        return const Color(0xFF8B0000);
       case 'guerrero':
         return Colors.brown.shade300;
       default:
@@ -23,7 +23,7 @@ class CardDisplayWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ValueNotifier<bool> isTapped = ValueNotifier(false);
-    final String rareza = data["Rareza"] ?? "guerrero";
+    final String rareza = data["Rareza"] ?? "";
     final Color borderColor = colorBorder(rareza);
 
     return Center(
@@ -74,7 +74,7 @@ class CardDisplayWidget extends StatelessWidget {
                                   ),
                             ),
                           ),
-
+                          // Animación de atributos
                           if (tapped) ...[
                             // Vida
                             Positioned(
@@ -85,8 +85,8 @@ class CardDisplayWidget extends StatelessWidget {
                                 children: [
                                   Image.asset(
                                     'assets/img/corazon.png',
-                                    height: 26,
-                                    width: 30,
+                                    height: 35,
+                                    width: 35,
                                   ),
                                   Text(
                                     '${data["Vida"] ?? ''}',
@@ -109,8 +109,8 @@ class CardDisplayWidget extends StatelessWidget {
                                 children: [
                                   Image.asset(
                                     'assets/img/espada.png',
-                                    height: 26,
-                                    width: 30,
+                                    height: 33,
+                                    width: 33,
                                   ),
                                   Text(
                                     '${data["Ataque"] ?? ''}',
