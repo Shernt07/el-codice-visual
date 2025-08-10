@@ -1,44 +1,72 @@
+import 'dart:math';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 
 class RectangleInitialComponent extends PositionComponent {
   final double sizeRectangle;
-  final Color color;
   final double borderRadius;
+  final double pulsoSize;
+  final double pulsoSpeed;
+  final double intervalChange;
+  Color colorInitial;
+  Color colorObjective;
+  double timeColor = 0;
+  double initialTime = 0;
 
   RectangleInitialComponent({
-    this.sizeRectangle = 150, // Valor por defecto
-    this.color = Colors.red,
+    // Por defecto
+    this.sizeRectangle = 150,
+    Color color = Colors.blue,
     this.borderRadius = 16,
-  }) : super(
-         size: Vector2(sizeRectangle, sizeRectangle), // Vector2(x, y)
-       );
+    this.pulsoSize = 30,
+    this.pulsoSpeed = 2,
+    this.intervalChange = 2.0,
+  }) : colorInitial = color,
+       colorObjective = color,
+       super(size: Vector2(sizeRectangle, sizeRectangle));
 
-  ///  Este método se llama cada vez que el tamaño del juego cambia.
-  @override
+  @override /* Colocar el cuadro en el centro */
   void onGameResize(Vector2 gameSize) {
     super.onGameResize(gameSize);
-
-    //! Centrar: posición = mitad de la pantalla - mitad del cuadrado
     position = gameSize / 2 - size / 2;
   }
 
-  /// Aquí definimos cómo se dibuja el componente.
-  /// `Canvas` es el lienzo donde se pinta el rectángulo.
+  @override /* Game Loop */
+  void update(double dt) {
+    super.update(dt);
+
+    initialTime += dt;
+    timeColor += dt;
+
+    // Efecto de pulsación
+    double scalaAnimacion = sin(initialTime * pulsoSpeed) * pulsoSize;
+    size = Vector2(
+      sizeRectangle + scalaAnimacion,
+      sizeRectangle + scalaAnimacion,
+    );
+
+    // Interpolación de color
+    double t = (timeColor / intervalChange).clamp(0, 1);
+    colorInitial = Color.lerp(colorInitial, colorObjective, t)!;
+
+    if (timeColor >= intervalChange) {
+      colorObjective = _color()[Random().nextInt(_color().length)];
+      timeColor = 0;
+    }
+  }
+
   @override
   void render(Canvas canvas) {
     super.render(canvas);
 
-    // Creamos un "pincel" con el color deseado.
-    final paint = Paint()..color = color;
-
-    // Definimos un rectángulo desde (0,0) hasta (ancho, alto).
+    final paint = Paint()..color = colorInitial;
     final rect = Rect.fromLTWH(0, 0, size.x, size.y);
-
-    // Lo convertimos en un RRect (rectángulo redondeado).
     final rrect = RRect.fromRectAndRadius(rect, Radius.circular(borderRadius));
 
-    // Dibujamos en el lienzo.
     canvas.drawRRect(rrect, paint);
+  }
+
+  List<MaterialColor> _color() {
+    return [Colors.red, Colors.purple, Colors.orange, Colors.cyan];
   }
 }

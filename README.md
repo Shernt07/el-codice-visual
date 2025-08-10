@@ -11,6 +11,25 @@ Guarda las rutas a las screens (pages), haciendo uso de GoRouter.
 
 Utilidades para el proyecto.
 
+## game
+Contiene todo lo que respecta a Flame Engine
+
+- game.dart
+
+Motor de Flame para mostrar lo que se cree.
+
+- game_screen.dart
+
+Se utiliza el GameWidget para por usar Flame en un árbol de widgets de Flutter,  
+(poder usar Flame en cualquier parte del proyecto).
+
+- components
+
+Carpeta que contiene fragmentos reutilizables por ejemplo -> 
+
+Tarea 1 => cuadro que cambia de color y tamaño.
+
+
 ## models
 
 Dentro hay un archivo con los objetos de datos, hay uno por cada tipo de rareza.

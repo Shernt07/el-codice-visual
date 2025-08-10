@@ -1,6 +1,4 @@
-import 'dart:ui';
 import 'package:el_codice_visual/game/components/rectangle_Component.dart';
-import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +11,7 @@ class GameFlame extends FlameGame {
   // Inicializar componentes y/o recursos.
   Future<void> onLoad() async {
     super.onLoad();
-    Flame.device.fullScreen();
+    // Flame.device.fullScreen();
     add(RectangleInitialComponent(color: Colors.purple));
   }
 

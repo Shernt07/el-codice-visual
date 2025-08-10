@@ -8,6 +8,7 @@ class GameScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //? (GameWidget) es la palabra clave para integrar flame a un árbol de widgets de Flutter (StatelessWidget, StatefulWidget).
     return Scaffold(body: GameWidget(game: GameFlame()));
   }
 }
