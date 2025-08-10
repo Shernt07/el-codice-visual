@@ -10,7 +10,7 @@ class BaseButton extends StatelessWidget {
     super.key,
     required this.name,
     required this.nameroute,
-    required this.data,
+    this.data = const {},
   });
 
   @override

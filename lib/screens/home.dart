@@ -38,6 +38,7 @@ class Home extends StatelessWidget {
               nameroute: 'testcard_screen',
               data: cartaDios,
             ),
+            BaseButton(name: 'Tarea1', nameroute: 'game_screen'),
           ],
         ),
       ),

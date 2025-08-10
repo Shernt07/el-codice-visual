@@ -19,5 +19,12 @@ final appRouter = GoRouter(
         return MaterialPage(key: state.pageKey, child: TestCard(data: data));
       },
     ),
+    GoRoute(
+      path: "/game",
+      name: "game_screen",
+      pageBuilder:
+          (context, state) =>
+              MaterialPage(key: state.pageKey, child: GameScreen()),
+    ),
   ],
 );
