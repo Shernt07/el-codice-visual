@@ -62,4 +62,4 @@ Widget reutilizable, es la carta que recibe el objeto de datos y muestra sus atr
 
 ---
 
-Última edición 25 de Julio de 2025.
+Última edición 10 de Agosto de 2025.
