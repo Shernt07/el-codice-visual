@@ -1,3 +1,4 @@
+import 'package:el_codice_visual/game/components/card_component.dart';
 import 'package:el_codice_visual/game/components/rectangle_Component.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,7 @@ class GameFlame extends FlameGame {
     super.onLoad();
     // Flame.device.fullScreen();
     add(RectangleInitialComponent(color: Colors.purple));
+    add(SpriteComponentInitial(image: 'aztecagood.jpeg'));
   }
 
   @override
