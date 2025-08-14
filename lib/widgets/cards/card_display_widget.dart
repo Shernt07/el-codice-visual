@@ -89,7 +89,7 @@ class CardDisplayWidget extends StatelessWidget {
                                 alignment: Alignment.center,
                                 children: [
                                   Image.asset(
-                                    'assets/img/corazon.png',
+                                    'assets/images/corazon.png',
                                     height: 35,
                                     width: 35,
                                   ),
@@ -113,7 +113,7 @@ class CardDisplayWidget extends StatelessWidget {
                                 alignment: Alignment.center,
                                 children: [
                                   Image.asset(
-                                    'assets/img/espada.png',
+                                    'assets/images/espada.png',
                                     height: 33,
                                     width: 33,
                                   ),

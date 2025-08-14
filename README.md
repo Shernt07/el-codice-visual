@@ -27,7 +27,9 @@ Se utiliza el GameWidget para por usar Flame en un árbol de widgets de Flutter,
 
 Carpeta que contiene fragmentos reutilizables por ejemplo -> 
 
-Tarea 1 => cuadro que cambia de color y tamaño.
+Tarea 1 => Cuadro que cambia de color y tamaño.
+
+Tarea 2 => Imagen con efecto, mantener pulsado para activar animación simple de tamaño
 
 
 ## models
@@ -62,4 +64,4 @@ Widget reutilizable, es la carta que recibe el objeto de datos y muestra sus atr
 
 ---
 
-Última edición 10 de Agosto de 2025.
+Última edición 14 de Agosto de 2025.

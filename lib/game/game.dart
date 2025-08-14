@@ -1,3 +1,4 @@
+import 'package:el_codice_visual/game/components/card_component.dart';
 import 'package:el_codice_visual/game/components/rectangle_Component.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,10 @@ class GameFlame extends FlameGame {
   Future<void> onLoad() async {
     super.onLoad();
     // Flame.device.fullScreen();
-    add(RectangleInitialComponent(color: Colors.purple));
+    // add(RectangleInitialComponent(color: Colors.purple, sizeRectangle: 300));
+    add(
+      SpriteComponentInitial(image: 'aztecagood.jpeg', size: Vector2(200, 300)),
+    );
   }
 
   @override
