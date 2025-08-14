@@ -13,11 +13,16 @@ class SpriteComponentInitial extends SpriteComponent {
 
     // Carga de imagen
     // final path = 'assets/img/$image';
-    sprite = await Sprite.load('img/$image');
+    sprite = await Sprite.load(image);
 
     // Posición inicial
     position = Vector2(100, 100);
 
     print('ruta de image: $image');
+  }
+
+  @override
+  void update(double dt) {
+    super.update(dt);
   }
 }

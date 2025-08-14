@@ -94,7 +94,7 @@ flutter:
 
 
   assets:
-    - assets/img/espada.png
-    - assets/img/corazon.png
-    - assets/img/calendario.png
-    - assets/img/aztecagood.jpeg
+    - assets/images/espada.png
+    - assets/images/corazon.png
+    - assets/images/calendario.png
+    - assets/images/aztecagood.jpeg
