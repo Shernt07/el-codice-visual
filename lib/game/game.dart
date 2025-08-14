@@ -13,7 +13,7 @@ class GameFlame extends FlameGame {
   Future<void> onLoad() async {
     super.onLoad();
     // Flame.device.fullScreen();
-    // add(RectangleInitialComponent(color: Colors.purple));
+    // add(RectangleInitialComponent(color: Colors.purple, sizeRectangle: 300));
     add(
       SpriteComponentInitial(image: 'aztecagood.jpeg', size: Vector2(200, 300)),
     );
